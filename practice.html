@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>Bank Account Management System</title>
+</head>
+<body>
+    <h1>Create Account</h1>
+    <label>Name : </label> <input type="text"  id="name"> <br><br>
+    <label>CNIC : </label> <input type="number" id="cnic"> <br><br>
+    <label>Age  : </label> <input type="number" id="age"> <br><br>
+    <button onclick="create()">Create Account</button> <br> <br>
+    <h2 id="result"></h2>
+
+    <h3>Select Options</h3>
+    <select id="main">
+        <option>NAN</option>
+        <option value="1">Balance</option>
+        <option value="2">Profile</option>
+        <option value="3">Withdrawal</option>
+        <option value="4">Add Balance</option>
+    </select>
+    <br><br>
+    <button onclick="showOption()">Proceed</button>
+    <h2 id="optionResult"></h2>
+
+    <script>
+        balance = 0;
+        function create(){
+            cnic = document.getElementById('cnic').value;
+            age = document.getElementById('age').value;
+            accountnum = cnic + age ;
+            balance = 1000;
+            document.getElementById('result').innerText = 'Your Account Number is ' + accountnum +  '.' +
+            '\n Your Opening Balance is ' + balance + '.' ;
+        }
+
+        function showOption(){
+            main =parseInt(document.getElementById('main').value);
+            switch(main){
+                case 1:
+                    document.getElementById('optionResult').innerText = "Your account Balance is " + balance + '.' ;
+                    break;
+                case 2:
+                    name = document.getElementById('name').value;
+                    document.getElementById('optionResult').innerText = "Your cnic is " + cnic + '.' + "\n Your age is " + age + "." + "\n Your acc number is " + accountnum + '.' + " \nYour name is " + name + '. ';
+                    break;
+                case 3:
+                    document.getElementById('optionResult').innerHTML = `<label>Enter Widthrawl Amount : </label> <br><br>
+                    <input type="number" id="wm"> <br><br> <button onclick="wd()">Widthrawl</button>`;
+                    break;
+                case 4:
+                    document.getElementById('optionResult').innerHTML = `<label>Add balance : </label> <br><br>
+                     <input type="number" id="add"> <br><br> <button onclick="addBalance()">Add balance</button>`;
+                    break;
+            }
+        }
+
+        function wd(){
+            wm = document.getElementById('wm').value;
+            if(wm > balance){
+                alert("Insufficient Balance");
+            }
+            else{
+               alert(wm + " Amount Withdraw Successfully!");
+               document.getElementById('optionResult').innerHTML = " ";
+            }
+        }
+
+        function addBalance(){
+          add = Number(document.getElementById('add').value);
+          newbalance = balance + add;
+          document.getElementById('optionResult').innerText = "Your new balance is " + newbalance + '.' ;
+        }
+    </script>
+    
+</body>
+</html>
